@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Altar Digital - MIGUE F. | Devoto de la Santa Muerte</title>
+<meta name="description" content="Altar digital de MIGUE F., fiel creyente de la Bendita Santa Muerte. Oraciones, fe y abundancia.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #d4af37;
+  --red: #8b0000;
+  --bg: #0a0a0a;
+  --text: #e5e5e5;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+h1, h2 {
+  font-family: 'Playfair Display', serif;
+  color: var(--gold);
+}
+
+/* Hero Section con Canvas y Contenido */
+.hero {
+  position: relative;
+  height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.85)), url('images/hero.jpg') center/cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  overflow: hidden;
+}
+#particles-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hero h1 {
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  letter-spacing: 2px;
+  text-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+}
+.hero .name {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-top: 0.5rem;
+  letter-spacing: 3px;
+}
+.hero p {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+/* Botones Premium */
+.btn-gold {
+  display: inline-block;
+  margin-top: 2rem;
+  background: var(--gold);
+  color: #000;
+  padding: 1rem 2.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 50px;
+  transition: all 0.3s;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+}
+.btn-gold:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
+}
+
+/* Layout y Contenedores */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+}
+.section {
+  margin-bottom: 6rem;
+}
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+.profile-img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+}
+.prayer {
+  background: linear-gradient(135deg, rgba(139, 0, 0, 0.2), rgba(212, 175, 55, 0.1));
+  border-left: 4px solid var(--gold);
+  padding: 2.5rem;
+  margin: 3rem 0;
+  font-style: italic;
+  font-size: 1.25rem;
+  text-align: center;
+  border-radius: 0 12px 12px 0;
+}
+
+/* Guía Interactiva de Colores */
+.color-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.color-tab {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  padding: 1.5rem 1rem;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.color-tab img {
+  width: 80%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: all 0.3s ease;
+  opacity: 0.6;
+  filter: grayscale(40%);
+  border: 2px solid transparent;
+}
+.color-tab p {
+  margin-top: 0.8rem;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.3s;
+}
+.color-tab:hover img {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+.color-tab.active {
+  background: rgba(212, 175, 55, 0.05);
+  border-color: var(--gold);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+}
+.color-tab.active img {
+  opacity: 1;
+  filter: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+}
+.color-tab.active p {
+  color: var(--gold);
+}
+.color-content-box {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(212, 175, 55, 0.03));
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 12px;
+  padding: 2.5rem;
+  margin-top: 1.5rem;
+  min-height: 180px;
+}
+.color-detail {
+  display: none;
+  animation: fadeIn 0.5s ease forwards;
+}
+.color-detail.active {
+  display: block;
+}
+.color-detail h3 {
+  color: var(--gold);
+  margin-bottom: 0.8rem;
+  font-size: 1.4rem;
+}
+.color-detail p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+.color-ritual {
+  margin-top: 1.2rem;
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(212, 175, 55, 0.1);
+  padding-top: 0.8rem;
+  color: var(--gold);
+}
+
+/* Ofrenda de Velas Virtuales */
+.candles-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  justify-content: center;
+  max-width: 850px;
+  margin: 2rem auto 0;
+}
+.candle-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  padding: 2rem 1.5rem 1.5rem;
+  border-radius: 12px;
+  transition: all 0.5s ease;
+  position: relative;
+  overflow: hidden;
+}
+.candle-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: transparent;
+  transition: background-color 0.5s;
+}
+.candle-wrapper.lit-bg::before {
+  background: var(--gold);
+}
+.candle-wrapper.lit-bg.roja::before {
+  background: #ff3333;
+}
+.candle-wrapper.lit-bg.negra::before {
+  background: #fff;
+}
+.candle {
+  position: relative;
+  width: 40px;
+  height: 120px;
+  margin-bottom: 1.5rem;
+}
+.candle-body {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  border-radius: 6px/12px;
+  box-shadow: inset 15px -15px 30px rgba(0,0,0,0.6), inset -15px 15px 30px rgba(255,255,255,0.08);
+}
+.candle.dorada .candle-body {
+  background: linear-gradient(to right, #8a640f, #e5c158, #8a640f);
+  border: 1px solid rgba(212,175,55,0.3);
+}
+.candle.roja .candle-body {
+  background: linear-gradient(to right, #600, #ff3333, #600);
+  border: 1px solid rgba(255,0,0,0.25);
+}
+.candle.negra .candle-body {
+  background: linear-gradient(to right, #0f0f0f, #3a3a3a, #0f0f0f);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.wick {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 10px;
+  background: #111;
+  border-radius: 2px;
+}
+.flame {
+  position: absolute;
+  bottom: 108px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 38px;
+  border-radius: 50% 50% 20% 20%;
+  background: linear-gradient(to bottom, #ffea80, #ff7700, #ff3300);
+  filter: blur(0.2px);
+  opacity: 0;
+  transition: opacity 0.6s, transform 0.6s;
+  transform-origin: bottom center;
+}
+.candle.lit .flame {
+  opacity: 1;
+  animation: flicker 1.8s ease-in-out infinite alternate;
+}
+.candle.lit.dorada .flame {
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.8), 0 0 40px rgba(212, 175, 55, 0.4);
+}
+.candle.lit.roja .flame {
+  box-shadow: 0 0 20px rgba(255, 51, 51, 0.85), 0 0 40px rgba(255, 51, 51, 0.4);
+}
+.candle.lit.negra .flame {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 100, 50, 0.35);
+}
+.btn-candle {
+  background: none;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 0.6rem 1.2rem;
+  border-radius: 30px;
+  cursor: pointer;
+  font-family: Inter, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.3s;
+  outline: none;
+}
+.btn-candle:hover {
+  background: var(--gold);
+  color: #000;
+}
+.candle-wrapper.lit-bg {
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.08);
+  border-color: rgba(212, 175, 55, 0.3);
+}
+.candle-wrapper.lit-bg.roja {
+  box-shadow: 0 0 25px rgba(255, 51, 51, 0.08);
+  border-color: rgba(255, 51, 51, 0.3);
+}
+.candle-wrapper.lit-bg.negra {
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.candle-count {
+  margin-top: 0.8rem;
+  font-size: 0.8rem;
+  opacity: 0.5;
+  font-family: monospace;
+}
+
+/* Redes Sociales */
+.socials {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 2rem;
+}
+.socials a {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 0.8rem 1.5rem;
+  text-decoration: none;
+  border-radius: 30px;
+  transition: all 0.3s;
+}
+.socials a:hover {
+  background: var(--gold);
+  color: #000;
+}
+
+/* Oraciones Cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.card h3 {
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+.card p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* Floating Audio Player */
+.audio-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 56px;
+  height: 56px;
+  background: rgba(10, 10, 10, 0.85);
+  border: 2px solid var(--gold);
+  color: var(--gold);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+  transition: all 0.3s ease;
+  outline: none;
+}
+.audio-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
+  background: var(--gold);
+  color: #000;
+}
+.audio-btn.playing {
+  animation: pulse-gold 2s infinite;
+}
+.audio-tooltip {
+  position: absolute;
+  right: 70px;
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  font-family: Inter, sans-serif;
+}
+.audio-btn:hover .audio-tooltip {
+  opacity: 1;
+}
+
+/* Animaciones de Scroll */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.scroll-reveal.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes pulse-gold {
+  0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.6); }
+  70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes flicker {
+  0% { transform: translateX(-50%) scale(1) rotate(-1.5deg); }
+  20% { transform: translateX(-50%) scale(1.03) rotate(1deg); }
+  40% { transform: translateX(-50%) scale(0.97) rotate(-1deg); }
+  60% { transform: translateX(-50%) scale(1.02) rotate(1.5deg); }
+  80% { transform: translateX(-50%) scale(0.98) rotate(-0.5deg); }
+  100% { transform: translateX(-50%) scale(1) rotate(0deg); }
+}
+
+footer {
+  text-align: center;
+  padding: 3rem 1rem;
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .grid-2 { grid-template-columns: 1fr; gap: 2rem; }
+  .color-tabs { gap: 0.8rem; }
+  .color-tab { padding: 1rem 0.5rem; }
+  .color-content-box { padding: 1.5rem; }
+  .candles-container { grid-template-columns: 1fr; gap: 1.5rem; }
+  .audio-btn { bottom: 1.5rem; right: 1.5rem; width: 50px; height: 50px; }
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <canvas id="particles-canvas"></canvas>
+  <div class="hero-content">
+    <h1>ALTAR DIGITAL</h1>
+    <div class="name">MIGUE F.</div>
+    <p>Fiel Creyente de la Bendita Santa Muerte</p>
+    <a href="altar.html" class="btn-gold">¿Quieres tu propio altar digital?</a>
+  </div>
+</section>
+
+<div class="container">
+  
+  <section class="section grid-2 scroll-reveal">
+    <img src="images/migue.jpg" alt="MIGUE F." class="profile-img">
+    <div>
+      <h2>Mi Fe</h2>
+      <p>Hola, soy Miguel F. Bienvenido a mi Altar Digital.<br>Aquí comparto mis oraciones y mi fe por la Bendita Santa Muerte.<br>Le construí este espacio porque la devoción también vive en internet.<br>Si sientes el llamado de tener el tuyo, aquí abajo están mis redes.<br>Gracias por llegar.</p>
+    </div>
+  </section>
+
+  <div class="prayer scroll-reveal">
+    "Flaquita hermosa, tú que ves mi código y mi fe,<br>multiplica lo que toco, protege lo que construyo.<br>Así es, así será."
+  </div>
+
+  <section class="section scroll-reveal">
+    <h2 style="text-align:center;margin-bottom:0.5rem">Guía y Significado de los Colores</h2>
+    <p style="text-align:center;max-width:600px;margin:0 auto 2rem;opacity:0.8;font-size:0.95rem">Haz clic en cada imagen para conocer el poder de cada manto y su oración especial.</p>
+    
+    <div class="color-tabs">
+      <div class="color-tab active" data-color="dorada">
+        <img src="images/santa-dorada.png" alt="Santa Dorada">
+        <p>Dorada - Abundancia</p>
+      </div>
+      <div class="color-tab" data-color="roja">
+        <img src="images/santa-roja.png" alt="Santa Roja">
+        <p>Roja - Amor</p>
+      </div>
+      <div class="color-tab" data-color="blanca">
+        <img src="images/santa-blanca.png" alt="Santa Blanca">
+        <p>Blanca - Paz</p>
+      </div>
+    </div>
+    
+    <div class="color-content-box">
+      <div id="color-detail-dorada" class="color-detail active">
+        <h3>Manto Dorado: Dinero, Ventas y Negocios</h3>
+        <p>La Santa Muerte Dorada representa el éxito financiero, el oro y la prosperidad económica. Ideal para comerciantes, emprendedores y quienes buscan multiplicar sus ventas, conseguir clientes o superar obstáculos económicos.</p>
+        <div class="color-ritual"><strong>Día de Devoción:</strong> Miércoles | <strong>Ofrenda sugerida:</strong> Monedas doradas, miel y una copa de tequila.</div>
+      </div>
+      <div id="color-detail-roja" class="color-detail">
+        <h3>Manto Rojo: Amor, Unión y Relaciones</h3>
+        <p>La Santa Muerte Roja rige los lazos emocionales, el amor pasional, la fidelidad y el entendimiento familiar. Ayuda a atraer al amor sincero, sanar relaciones rotas y proteger tus sentimientos contra envidias.</p>
+        <div class="color-ritual"><strong>Día de Devoción:</strong> Jueves | <strong>Ofrenda sugerida:</strong> Rosas rojas, manzanas con miel y una vela roja.</div>
+      </div>
+      <div id="color-detail-blanca" class="color-detail">
+        <h3>Manto Blanco: Salud, Paz y Purificación</h3>
+        <p>La Santa Muerte Blanca simboliza la pureza, el perdón y la armonía espiritual. Limpia las malas vibras de tu hogar, brinda paz a la mente inquieta y protege a los seres queridos de enfermedades y accidentes.</p>
+        <div class="color-ritual"><strong>Día de Devoción:</strong> Domingo | <strong>Ofrenda sugerida:</strong> Flores blancas, un vaso de agua y copal.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section scroll-reveal">
+    <h2 style="text-align:center;margin-bottom:0.5rem">Ofrenda de Velas Virtuales</h2>
+    <p style="text-align:center;max-width:600px;margin:0 auto 2rem;opacity:0.8;font-size:0.95rem">Tómate un momento de fe. Haz clic para encender una vela en honor a la Santa Muerte. Tu ofrenda se guardará en tu navegador.</p>
+    
+    <div class="candles-container">
+      <div class="candle-wrapper" id="candle-dorada">
+        <div class="candle dorada">
+          <div class="flame"></div>
+          <div class="wick"></div>
+          <div class="candle-body"></div>
+        </div>
+        <button class="btn-candle" onclick="toggleCandle('dorada')">Encender Dorada (Dinero)</button>
+        <div class="candle-count">Ofrendas: <span id="count-dorada">1248</span></div>
+      </div>
+      
+      <div class="candle-wrapper roja" id="candle-roja">
+        <div class="candle roja">
+          <div class="flame"></div>
+          <div class="wick"></div>
+          <div class="candle-body"></div>
+        </div>
+        <button class="btn-candle" onclick="toggleCandle('roja')">Encender Roja (Amor)</button>
+        <div class="candle-count">Ofrendas: <span id="count-roja">984</span></div>
+      </div>
+      
+      <div class="candle-wrapper negra" id="candle-negra">
+        <div class="candle negra">
+          <div class="flame"></div>
+          <div class="wick"></div>
+          <div class="candle-body"></div>
+        </div>
+        <button class="btn-candle" onclick="toggleCandle('negra')">Encender Negra (Protección)</button>
+        <div class="candle-count">Ofrendas: <span id="count-negra">1532</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section scroll-reveal">
+    <h2 style="text-align:center">Mis Redes</h2>
+    <div class="socials">
+      <a href="https://www.facebook.com/share/1DryUNC5iX/" target="_blank" rel="noopener noreferrer">Facebook</a>
+      <a href="https://www.instagram.com/figmigue?igsh=c3Z5eHZ5cG5md21s" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="https://www.threads.com/@figmigue" target="_blank" rel="noopener noreferrer">Threads</a>
+      <a href="https://vk.com/miguef" target="_blank" rel="noopener noreferrer">VK</a>
+      <a href="https://www.tiktok.com/@gold.like.me?_r=1&_t=ZS-97KSFB1kqY9" target="_blank" rel="noopener noreferrer">TikTok</a>
+    </div>
+  </section>
+
+  <section class="section scroll-reveal">
+    <h2 style="text-align:center;margin-bottom:1.5rem">Oraciones</h2>
+    <div class="cards">
+      <div class="card">
+        <div>
+          <h3>Caminos Abiertos</h3>
+          <p>Porque el que da y comparte, recibe la mejor y mayor parte.<br>Así es, así ha de ser.</p>
+        </div>
+        <a href="https://www.facebook.com/share/r/1BRMEhT335/" class="btn-gold" target="_blank" rel="noopener noreferrer" style="padding:0.6rem 1.5rem;font-size:0.9rem;margin-top:1rem;display:inline-block">Ver en Facebook</a>
+      </div>
+      <div class="card">
+        <div>
+          <h3>Himno del Emprendedor</h3>
+          <p>De rogar por una venta a piloto automático.</p>
+        </div>
+        <a href="https://www.facebook.com/share/v/1GsBGnA5K3/" class="btn-gold" target="_blank" rel="noopener noreferrer" style="padding:0.6rem 1.5rem;font-size:0.9rem;margin-top:1rem;display:inline-block">Ver en Facebook</a>
+      </div>
+      <div class="card">
+        <div>
+          <h3>Ofrenda Digital Por Todos</h3>
+          <p>Pan calientito recién sacado del horno, un vasito de jugo de manzana y una bella rosa perfumada.</p>
+        </div>
+        <a href="https://www.facebook.com/share/r/1BnDGYCfZx/" class="btn-gold" target="_blank" rel="noopener noreferrer" style="padding:0.6rem 1.5rem;font-size:0.9rem;margin-top:1rem;display:inline-block">Ver en Facebook</a>
+      </div>
+      <div class="card">
+        <img src="images/roja.jpg" alt="Roja" style="width:100%;border-radius:8px;margin-bottom:1rem;aspect-ratio:1;object-fit:cover;">
+        <h3>Roja</h3>
+        <p>❤️ Santa Muerte Roja, enciende el amor en mi vida. Atrae a mi pareja ideal, fiel y verdadera. Así está hecho.</p>
+      </div>
+      <div class="card">
+        <img src="images/dorada.jpg" alt="Dorada" style="width:100%;border-radius:8px;margin-bottom:1rem;aspect-ratio:1;object-fit:cover;">
+        <h3>Dorada</h3>
+        <p>💰Santa Muerte Dorada, gracias por abrirme los caminos de la abundancia y hacer que mis ventas se multipliquen. Así está hecho.</p>
+      </div>
+      <div class="card">
+        <img src="images/proteccion.jpg" alt="Protección" style="width:100%;border-radius:8px;margin-bottom:1rem;aspect-ratio:1;object-fit:cover;">
+        <h3>Protección</h3>
+        <p>Santa Muerte Negra, corta la envidia y el mal de mi camino. Protege mi hogar, mi negocio y mi vida. Así está hecho.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<button id="audio-toggle" class="audio-btn" aria-label="Música ambiental">
+  <svg viewBox="0 0 24 24" width="24" height="24">
+    <path fill="currentColor" d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6zM10 19c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+  </svg>
+  <span class="audio-tooltip">Música Mística</span>
+</button>
+
+<footer>Gracias, Flaquita hermosa. Así es, así ha de ser.</footer>
+
+<script>
+// --- 1. Fondo de Partículas (Efecto humo/incienso dorado) ---
+function initParticles() {
+  const canvas = document.getElementById('particles-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  
+  let width = canvas.width = canvas.offsetWidth;
+  let height = canvas.height = canvas.offsetHeight;
+  
+  window.addEventListener('resize', () => {
+    if (canvas.offsetWidth === 0 || canvas.offsetHeight === 0) return;
+    width = canvas.width = canvas.offsetWidth;
+    height = canvas.height = canvas.offsetHeight;
+  });
+  
+  const particles = [];
+  const maxParticles = 60;
+  
+  class Particle {
+    constructor() {
+      this.reset();
+      this.y = Math.random() * height;
+    }
+    
+    reset() {
+      this.x = Math.random() * width;
+      this.y = height + Math.random() * 20;
+      this.size = Math.random() * 2.5 + 0.8;
+      this.speedY = -(Math.random() * 0.7 + 0.3);
+      this.speedX = (Math.random() - 0.5) * 0.25;
+      this.alpha = 1;
+      this.decay = Math.random() * 0.004 + 0.002;
+      this.r = 212;
+      this.g = Math.floor(Math.random() * 45 + 160); // Tonalidades doradas
+      this.b = 55;
+    }
+    
+    update() {
+      this.y += this.speedY;
+      this.x += this.speedX;
+      this.alpha -= this.decay;
+      if (this.alpha <= 0 || this.y < 0) {
+        this.reset();
+      }
+    }
+    
+    draw() {
+      ctx.fillStyle = `rgba(${this.r}, ${this.g}, ${this.b}, ${this.alpha})`;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+  
+  for (let i = 0; i < maxParticles; i++) {
+    particles.push(new Particle());
+  }
+  
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+    requestAnimationFrame(animate);
+  }
+  
+  animate();
+}
+
+// --- 2. Sintetizador de Audio Ambiental (Web Audio API) ---
+let audioCtx = null;
+let droneOscs = [];
+let droneFilter = null;
+let droneGain = null;
+let isPlaying = false;
+
+function initAudio() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+}
+
+function startDrone() {
+  initAudio();
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+
+  droneGain = audioCtx.createGain();
+  droneGain.gain.setValueAtTime(0, audioCtx.currentTime);
+  droneGain.gain.linearRampToValueAtTime(0.12, audioCtx.currentTime + 3);
+
+  droneFilter = audioCtx.createBiquadFilter();
+  droneFilter.type = 'lowpass';
+  droneFilter.Q.setValueAtTime(4, audioCtx.currentTime);
+  droneFilter.frequency.setValueAtTime(110, audioCtx.currentTime);
+
+  // LFO para oscilar la calidez
+  const lfo = audioCtx.createOscillator();
+  const lfoGain = audioCtx.createGain();
+  lfo.frequency.setValueAtTime(0.12, audioCtx.currentTime);
+  lfoGain.gain.setValueAtTime(25, audioCtx.currentTime);
+  lfo.connect(lfoGain);
+  lfoGain.connect(droneFilter.frequency);
+  lfo.start();
+
+  // Notas para el acorde místico de fondo (Do / Sol / Do)
+  const osc1 = audioCtx.createOscillator();
+  const osc1Gain = audioCtx.createGain();
+  osc1.type = 'sawtooth';
+  osc1.frequency.setValueAtTime(65.41, audioCtx.currentTime); // C2
+  osc1Gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+
+  const osc2 = audioCtx.createOscillator();
+  const osc2Gain = audioCtx.createGain();
+  osc2.type = 'triangle';
+  osc2.frequency.setValueAtTime(98.00, audioCtx.currentTime); // G2
+  osc2Gain.gain.setValueAtTime(0.35, audioCtx.currentTime);
+
+  const osc3 = audioCtx.createOscillator();
+  const osc3Gain = audioCtx.createGain();
+  osc3.type = 'sine';
+  osc3.frequency.setValueAtTime(130.81, audioCtx.currentTime); // C3
+  osc3Gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+
+  osc1.connect(osc1Gain);
+  osc2.connect(osc2Gain);
+  osc3.connect(osc3Gain);
+
+  osc1Gain.connect(droneFilter);
+  osc2Gain.connect(droneFilter);
+  osc3Gain.connect(droneFilter);
+
+  droneFilter.connect(droneGain);
+  droneGain.connect(audioCtx.destination);
+
+  osc1.start();
+  osc2.start();
+  osc3.start();
+
+  droneOscs = [osc1, osc2, osc3, lfo];
+  isPlaying = true;
+  document.getElementById('audio-toggle').classList.add('playing');
+  document.querySelector('.audio-tooltip').innerText = "Silenciar Música";
+}
+
+function stopDrone() {
+  if (droneGain && audioCtx) {
+    droneGain.gain.setValueAtTime(droneGain.gain.value, audioCtx.currentTime);
+    droneGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1);
+    setTimeout(() => {
+      droneOscs.forEach(osc => { try { osc.stop(); } catch(e){} });
+      isPlaying = false;
+      document.getElementById('audio-toggle').classList.remove('playing');
+      document.querySelector('.audio-tooltip').innerText = "Escuchar Música";
+    }, 1000);
+  }
+}
+
+function toggleAudio() {
+  if (isPlaying) {
+    stopDrone();
+  } else {
+    startDrone();
+  }
+}
+
+function playBellChime() {
+  try {
+    initAudio();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    
+    const osc = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    const filter = audioCtx.createBiquadFilter();
+
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // Do5
+    osc.frequency.exponentialRampToValueAtTime(783.99, audioCtx.currentTime + 0.08); // Desliza a Sol5
+    
+    filter.type = 'bandpass';
+    filter.Q.setValueAtTime(3, audioCtx.currentTime);
+    filter.frequency.setValueAtTime(784, audioCtx.currentTime);
+
+    gainNode.gain.setValueAtTime(0.001, audioCtx.currentTime);
+    gainNode.gain.linearRampToValueAtTime(0.12, audioCtx.currentTime + 0.015);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.8);
+
+    osc.connect(filter);
+    filter.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+
+    osc.start();
+    osc.stop(audioCtx.currentTime + 2);
+  } catch(e) {
+    console.log("AudioContext blocked or uninitialized", e);
+  }
+}
+
+document.getElementById('audio-toggle').addEventListener('click', toggleAudio);
+
+// --- 3. Pestañas Interactivas de Colores ---
+document.querySelectorAll('.color-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const selectedColor = tab.getAttribute('data-color');
+    
+    document.querySelectorAll('.color-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    
+    document.querySelectorAll('.color-detail').forEach(detail => detail.classList.remove('active'));
+    document.getElementById(`color-detail-${selectedColor}`).classList.add('active');
+  });
+});
+
+// --- 4. Veladoras Virtuales con LocalStorage ---
+const initialCounts = {
+  dorada: 1248,
+  roja: 984,
+  negra: 1532
+};
+
+function initCandles() {
+  ['dorada', 'roja', 'negra'].forEach(color => {
+    const isLit = localStorage.getItem(`candle_${color}_lit`) === 'true';
+    const hasInteracted = localStorage.getItem(`candle_${color}_interacted`) === 'true';
+    
+    let count = initialCounts[color];
+    if (hasInteracted && isLit) {
+      count += 1;
+    }
+    document.getElementById(`count-${color}`).innerText = count;
+
+    if (isLit) {
+      document.querySelector(`#candle-${color} .candle`).classList.add('lit');
+      document.getElementById(`candle-${color}`).classList.add('lit-bg');
+      const btn = document.querySelector(`#candle-${color} .btn-candle`);
+      btn.innerText = `Apagar ${capitalize(color)}`;
+    }
+  });
+}
+
+function toggleCandle(color) {
+  const wrapper = document.getElementById(`candle-${color}`);
+  const candle = wrapper.querySelector('.candle');
+  const btn = wrapper.querySelector('.btn-candle');
+  const countSpan = document.getElementById(`count-${color}`);
+  
+  const isLit = candle.classList.contains('lit');
+  let currentCount = parseInt(countSpan.innerText);
+
+  if (!isLit) {
+    candle.classList.add('lit');
+    wrapper.classList.add('lit-bg');
+    btn.innerText = `Apagar ${capitalize(color)}`;
+    countSpan.innerText = currentCount + 1;
+    localStorage.setItem(`candle_${color}_lit`, 'true');
+    localStorage.setItem(`candle_${color}_interacted`, 'true');
+    
+    playBellChime();
+  } else {
+    candle.classList.remove('lit');
+    wrapper.classList.remove('lit-bg');
+    btn.innerText = `Encender ${capitalize(color)}`;
+    countSpan.innerText = currentCount - 1;
+    localStorage.setItem(`candle_${color}_lit`, 'false');
+  }
+}
+
+function capitalize(s) {
+  if (s === 'negra') return 'Negra';
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+// --- 5. Animaciones al hacer Scroll ---
+function initScrollReveal() {
+  const revealElements = document.querySelectorAll('.scroll-reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('reveal-visible');
+      }
+    });
+  }, {
+    threshold: 0.08,
+    rootMargin: '0px 0px -40px 0px'
+  });
+  
+  revealElements.forEach(el => observer.observe(el));
+}
+
+// Inicializar todo al cargar
+window.addEventListener('DOMContentLoaded', () => {
+  initParticles();
+  initCandles();
+  initScrollReveal();
+});
+</script>
+</body>
+</html>
