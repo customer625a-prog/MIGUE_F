@@ -1,0 +1,6 @@
+{
+  "url": "https://TU_PROYECTO.supabase.co/rest/v1/",
+  "anonKey": "TU_SUPABASE_PUBLISHABLE_KEY",
+  "table": "candle_counters",
+  "rpc": "increment_candle_counter"
+}

@@ -1,0 +1,156 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://customer625a-prog.github.io/MIGUE_F/#website",
+      "name": "Altar Digital MIGUE F.",
+      "url": "https://customer625a-prog.github.io/MIGUE_F/",
+      "description": "Altar digital de MIGUE F., fiel creyente de la Bendita Santa Muerte.",
+      "inLanguage": "es-MX",
+      "publisher": {
+        "@id": "https://customer625a-prog.github.io/MIGUE_F/#person"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://customer625a-prog.github.io/MIGUE_F/#webpage",
+      "url": "https://customer625a-prog.github.io/MIGUE_F/",
+      "name": "Altar Digital - MIGUE F. | Devoto de la Santa Muerte",
+      "description": "Altar digital de MIGUE F., fiel creyente de la Bendita Santa Muerte. Oraciones, fe y abundancia.",
+      "inLanguage": "es-MX",
+      "isPartOf": {
+        "@id": "https://customer625a-prog.github.io/MIGUE_F/#website"
+      },
+      "about": {
+        "@id": "https://customer625a-prog.github.io/MIGUE_F/#service"
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://customer625a-prog.github.io/MIGUE_F/images/hero.jpg"
+      },
+      "publisher": {
+        "@id": "https://customer625a-prog.github.io/MIGUE_F/#person"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://customer625a-prog.github.io/MIGUE_F/#person",
+      "name": "MIGUE F.",
+      "description": "Devoto de la Santa Muerte, emprendedor y creador de altares digitales personalizados.",
+      "url": "https://customer625a-prog.github.io/MIGUE_F/",
+      "image": "https://customer625a-prog.github.io/MIGUE_F/images/hero.jpg",
+      "sameAs": [
+        "https://www.facebook.com/share/1DryUNC5iX/",
+        "https://www.instagram.com/figmigue",
+        "https://www.threads.com/@figmigue",
+        "https://www.tiktok.com/@gold.like.me"
+      ],
+      "jobTitle": "Creador de altares digitales",
+      "knowsAbout": [
+        "Santa Muerte",
+        "Altares digitales",
+        "SEO",
+        "AEO",
+        "GEO",
+        "Páginas web personalizadas"
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://customer625a-prog.github.io/MIGUE_F/#service",
+      "serviceType": "Altar Digital Personalizado",
+      "name": "Altar Digital Personalizado",
+      "description": "Página web personalizada de altar digital para devotos de la Santa Muerte. Diseño negro y dorado, galería de imágenes, oraciones y redes conectadas.",
+      "provider": {
+        "@id": "https://customer625a-prog.github.io/MIGUE_F/#person"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "México"
+      },
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Devotos de la Santa Muerte"
+      },
+      "offers": {
+        "@type": "Offer",
+        "name": "Altar Digital Personalizado",
+        "description": "Diseño personalizado con galería, oraciones y redes sociales conectadas.",
+        "price": "499",
+        "priceCurrency": "MXN",
+        "availability": "https://schema.org/LimitedAvailability"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://customer625a-prog.github.io/MIGUE_F/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es un Altar Digital?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Es una página web propia dedicada a tu devoción, con tus fotos, oraciones y redes en un solo lugar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué incluye por $499 MXN?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Incluye diseño personalizado, galería, oraciones, redes conectadas, estilo negro y dorado y entrega rápida."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto tarda en estar listo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Normalmente entre 24 y 48 horas hábiles después de recibir tus fotos y contenido."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Se ve bien en celular?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, está pensado para verse bien en celular, tablet y escritorio."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo conectar mis redes sociales?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, se pueden enlazar tus perfiles principales para que tu comunidad encuentre todo en un solo lugar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Ayuda con Google y asistentes de IA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Una estructura clara y datos Schema ayudan a buscadores y asistentes a entender mejor tu presencia, aunque no garantizan posiciones."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué necesito enviar para empezar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tu nombre o el nombre del altar, fotos, redes sociales y el texto o intención que quieras publicar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿El primer año de alojamiento está incluido?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, el primer año está incluido y después se puede renovar a un costo bajo."
+          }
+        }
+      ]
+    }
+  ]
+}

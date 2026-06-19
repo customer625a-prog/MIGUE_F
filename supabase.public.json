@@ -1,0 +1,6 @@
+{
+  "url": "https://pazugfrzakctvxcnjwxy.supabase.co/rest/v1/",
+  "anonKey": "sb_publishable_RY_uBOjCpzx1dVSF8em7Dw_GNug7J7z",
+  "table": "candle_counters",
+  "rpc": "increment_candle_counter"
+}

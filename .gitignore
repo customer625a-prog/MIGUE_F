@@ -9,3 +9,7 @@ desktop.ini
 *.suo
 *.user
 *.workspace
+
+# Configuración local de Supabase
+supabase.local.json
+*.local.json
