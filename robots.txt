@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://customer625a-prog.github.io/MIGUE_F/sitemap.xml
